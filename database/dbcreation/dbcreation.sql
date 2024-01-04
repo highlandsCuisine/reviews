@@ -1,0 +1,45 @@
+CREATE TABLE IF NOT EXISTS user (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+   isVerified BOOLEAN DEFAULT false,
+  password VARCHAR(255) CHECK (
+    password REGEXP '[A-Z]' AND
+    password REGEXP '[0-9]' AND
+    password REGEXP '[@#$%^&+=]' AND
+    LENGTH(password) >= 8
+  ),
+  email VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tokens (
+  tid INT AUTO_INCREMENT PRIMARY KEY,
+  reset_token VARCHAR(255) UNIQUE NOT NULL,
+  expires DATETIME,
+  email VARCHAR(255),
+  FOREIGN KEY (email) REFERENCES user(email)
+);
+
+CREATE TABLE IF NOT EXISTS userverify (
+  uid INT AUTO_INCREMENT PRIMARY KEY,
+  user_token VARCHAR(255) UNIQUE NOT NULL,
+  expires DATETIME,
+  email VARCHAR(255),
+  FOREIGN KEY (email) REFERENCES user(email)
+);
+
+CREATE TABLE IF NOT EXISTS restaurant (
+  rid INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) UNIQUE NOT NULL,
+  link VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS review (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  author_name VARCHAR(255) NOT NULL,
+  author_url VARCHAR(255) NOT NULL,
+  profile_photo_url VARCHAR(255) NOT NULL,
+  text LONGTEXT,
+  rating INT NOT NULL,
+  rid INT,
+  FOREIGN KEY (rid) REFERENCES restaurant(rid)
+);

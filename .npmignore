@@ -1,0 +1,40 @@
+#Development and Test Files:
+
+/test
+/tests
+*.test.js
+*.spec.js
+#Version Control Files:
+
+.git
+.svn
+.hg
+#Editor and IDE Files:
+
+.vscode
+.idea
+*.sublime-project
+*.sublime-workspace
+*.iml (IntelliJ IDEA)
+#Build and Configuration Files:
+
+node_modules
+npm-debug.log
+.npmrc
+yarn.lock
+package-lock.json
+#Documentation and Metadata Files:
+
+/docs
+/doc
+/example
+/examples
+.esdoc
+.eslintrc
+.editorconfig
+#Temporary and Build Files:
+
+*.log
+*.swp
+*.swo
+*.bak
